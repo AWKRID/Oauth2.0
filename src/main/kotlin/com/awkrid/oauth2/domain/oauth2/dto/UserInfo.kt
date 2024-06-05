@@ -10,7 +10,7 @@ class UserInfo(
 )
 
 class Properties(
-    @JsonProperty("nickname") val nickname: String,
+    @JsonProperty("nickname") val username: String,
 )
 
 class KakaoAccount(

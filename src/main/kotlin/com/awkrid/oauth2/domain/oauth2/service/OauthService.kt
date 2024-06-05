@@ -21,7 +21,7 @@ class OauthService(
         val userInfo = kakaoClient.getUserInfo(kakaoAccessToken)
         val member = Member(
             id = userInfo.id,
-            username = userInfo.properties.nickname,
+            username = userInfo.properties.username,
             kakaoAccessToken = kakaoAccessToken,
             role = "user"
         )

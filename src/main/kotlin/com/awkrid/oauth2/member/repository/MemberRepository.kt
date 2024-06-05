@@ -11,5 +11,6 @@ class MemberRepository {
         storage[member.id] = member
 
     }
+    fun findById(id: Long): Member? = storage[id]
 
 }
