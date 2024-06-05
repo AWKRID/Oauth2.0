@@ -14,5 +14,4 @@ class MemberRepository {
     fun findById(id: Long): Member? {
         return storage[id]
     }
-
 }

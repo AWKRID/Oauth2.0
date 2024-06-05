@@ -21,8 +21,6 @@ class OauthController(
 
     @GetMapping("/kakao/login")
     fun kakaoLogin() : String{
-        val str = oauthService.getAuthorizationCode()
-        print(str)
         return oauthService.getAuthorizationCode()
     }
 }
