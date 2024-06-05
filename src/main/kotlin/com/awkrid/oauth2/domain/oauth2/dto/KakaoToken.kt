@@ -1,4 +1,4 @@
-package com.awkrid.oauth2.domain.oauth2
+package com.awkrid.oauth2.domain.oauth2.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

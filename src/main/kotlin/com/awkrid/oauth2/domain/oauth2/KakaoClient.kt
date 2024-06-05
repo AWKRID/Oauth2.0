@@ -1,5 +1,7 @@
 package com.awkrid.oauth2.domain.oauth2
 
+import com.awkrid.oauth2.domain.oauth2.dto.KakaoToken
+import com.awkrid.oauth2.domain.oauth2.dto.UserInfo
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
@@ -14,6 +16,7 @@ class KakaoClient(
     @Value("\${oauth.kakao.auth-url}") private val authUrl: String,
     @Value("\${oauth.kakao.token-url}") private val tokenUrl: String,
     @Value("\${oauth.kakao.client-secret}") private val clientSecret: String,
+    @Value("\${oauth.kakao.user-api-url}") private val userApiUrl: String,
     private val restTemplate: RestTemplate
 ) {
     fun getAuthorizationCodeUrl(): String {
@@ -25,6 +28,15 @@ class KakaoClient(
         val kakaoToken: KakaoToken = restTemplate.postForObject(tokenUrl, request, KakaoToken::class.java)
             ?: throw RuntimeException("Kakao token is null")
         return kakaoToken.accessToken
+    }
+
+    fun getUserInfo(accessToken: String): UserInfo {
+        val headers = HttpHeaders()
+        headers.contentType = MediaType.APPLICATION_FORM_URLENCODED
+        headers.set("Authorization", "Bearer $accessToken")
+        val request = HttpEntity<MultiValueMap<String, String>>(headers)
+        return restTemplate.postForObject(userApiUrl, request, UserInfo::class.java)
+            ?: throw RuntimeException("fail to load user info")
     }
 
     fun generateHttpRequests(loginParam: LoginParam): HttpEntity<MultiValueMap<String, String>> {

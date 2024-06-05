@@ -1,5 +1,6 @@
 package com.awkrid.oauth2.domain.oauth2.controller
 
+import com.awkrid.oauth2.domain.oauth2.dto.LoginResponse
 import com.awkrid.oauth2.domain.oauth2.service.OauthService
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
@@ -14,7 +15,7 @@ class OauthController(
 ) {
 
     @GetMapping("/kakao")
-    fun getToken(@RequestParam code: String): ResponseEntity<String> {
+    fun getToken(@RequestParam code: String): ResponseEntity<LoginResponse> {
         return ResponseEntity.ok(oauthService.login(code))
     }
 
