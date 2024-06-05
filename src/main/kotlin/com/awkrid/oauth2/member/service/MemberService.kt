@@ -13,8 +13,7 @@ class MemberService(
     fun loadProfile(accessToken: String): ProfileResponse {
         // TODO(예외처리 필요)
         val jwt = jwtPlugin.validateToken(accessToken)
-
-        val member = memberRepository.findById(jwt.payload.id.toLong())
+        val member = memberRepository.findById(jwt.payload.subject.toLong())
             ?: throw RuntimeException("Member with id ${jwt.payload.id} not found")
         return ProfileResponse(
             id = member.id,

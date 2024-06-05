@@ -16,6 +16,8 @@ class MemberController(private val memberService: MemberService) {
     fun getProfile(
         @RequestHeader("Authorization") authHeader: String,
     ): ResponseEntity<ProfileResponse> {
-        return ResponseEntity.ok(memberService.loadProfile(authHeader.substringAfter("Bearer ")))
+        val accessToken = authHeader.substringAfter("Bearer ")
+        print(accessToken)
+        return ResponseEntity.ok(memberService.loadProfile(accessToken))
     }
 }
